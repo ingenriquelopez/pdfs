@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <title>pfds</title>
+</head>
+<body>
+    <h1> Generador de Archivos PDF</h1>
+    <hr>
+
+<script >
+
+    
+const Tasks = [
+    { "id": "1", "date":"11/Oct/22 9:15 AM", "classroom":108,"gyg":"2A","problem":"Internet is not working", "status": "pending"},
+    { "id": "2", "date":"11/Oct/22 9:15 AM", "classroom":108,"gyg":"2A","problem":"Videproyector bad image", "status": "process"},
+    { "id": "3", "date":"11/Oct/22 9:15 AM", "classroom":108,"gyg":"2A","problem":"Computer fail", "status": "completed"},
+    { "id": "4", "date":"11/Oct/22 9:15 AM", "classroom":108,"gyg":"2A","problem":"Internet is not working", "status": "canceled"},
+    { "id": "5", "date":"11/Oct/22 9:15 AM", "classroom":108,"gyg":"2A","problem":"Internet is not working", "status": "completed"},
+    { "id": "6", "date":"11/Oct/22 9:15 AM", "classroom":108,"gyg":"2A","problem":"Internet is not working", "status": "pending"},
+    { "id": "7", "date":"11/Oct/22 9:15 AM", "classroom":108,"gyg":"2A","problem":"Internet is not working", "status": "pending"},
+    { "id": "8", "date":"11/Oct/22 9:15 AM", "classroom":108,"gyg":"2A","problem":"Internet is not working", "status": "pending"},
+    { "id": "9", "date":"11/Oct/22 9:15 AM", "classroom":108,"gyg":"2A","problem":"Internet is not working", "status": "canceled"},
+    { "id": "10", "date":"11/Oct/22 9:15 AM", "classroom":108,"gyg":"2A","problem":"Internet is not working", "status": "completed"},
+    { "id": "11", "date":"11/Oct/22 9:15 AM", "classroom":108,"gyg":"2A","problem":"Internet is not working", "status": "process"},
+    { "id": "12", "date":"11/Oct/22 9:15 AM", "classroom":108,"gyg":"2A","problem":"Internet is not working", "status": "fixed"},
+    { "id": "13", "date":"11/Oct/22 9:15 AM", "classroom":108,"gyg":"2A","problem":"Internet is not working", "status": "fixed"},
+    { "id": "14", "date":"11/Oct/22 9:15 AM", "classroom":108,"gyg":"2A","problem":"Internet is not working", "status": "fixed"},
+    { "id": "15", "date":"11/Oct/22 9:15 AM", "classroom":108,"gyg":"2A","problem":"Internet is not working", "status": "fixed"}
+]
+    const doc = new jsPDF();
+
+    var centeredText = function(text, y) {
+        var textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor;
+        var textOffset = (doc.internal.pageSize.width - textWidth) / 2;
+        doc.text(textOffset, y, text);
+    }
+    doc.addPage("letter","l");
+    doc.addFont('arial.ttf', 'arial', 'normal');
+                doc.setFont('arial');
+                doc.setFontSize(12);
+    
+    //doc.addImage("Logo.jpg",140,10,60,30),
+    centeredText("Hello world!", 10);
+    doc.line(10,10,200,10);
+        
+    Tasks.map( (e)=> {
+        doc.text(e.id,                   10, 10 + e.id*5)     
+         doc.text(e.date,                50, 10 + e.id*5)     
+        doc.text(e.classroom.toString(), 100, 10 + e.id*5)     
+        doc.text(e.gyg,                  130, 10 + e.id*5)     
+        doc.text(e.problem,              150, 10 + e.id*5)     
+        doc.text(e.status,    250, 10 + e.id*5)      
+    }
+    
+    );
+
+    
+    doc.save("order.pdf");
+</script>
+</body>
+</html>
